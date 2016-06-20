@@ -1,0 +1,69 @@
+#!/bin/bash
+
+function mensaje-error {
+	yad --title "$1" \
+	--window-icon=/usr/share/lxpanel/images/vitalinux.svg \
+	--image error \
+	--width 700 --height 150 \
+	--center \
+	--text="  $2" --text-align="center" \
+	--button="Continuar":0
+}
+
+
+# Obtenemos el número de parámetros recibidos: %F son el número de rutas absolutas de los archivos seleccionados
+NUMPARAM=$#
+if test $NUMPARAM -eq 0 ; then
+	TITULO="Error por Falta de parámetros"
+	TEXTO="¡¡Problema!! Debes indicar o seleccionar al menos un archivo a copiar ..."
+fi
+# Creamos una lista con los parámetros recibidos $@.  El primer parametro es el ${PARAM[0]} ...  ${PARAM[*]} sería todos
+# La mitad de los parametros recibidos son las rutas absolutas de los archivos, y la otra mitad son sus extensiones
+declare -a PARAM
+PARAM=($@)
+
+DESTINO=$(yad --title="Directorio destino donde Copiar los Archivos" \
+	--file --save --directory \
+	--window-icon=/usr/share/lxpanel/images/vitalinux.svg \
+	--width 750 --height 550 \
+	--text "\n  Indica el <b>directorio de Destino</b> para la copia de los Archivos:\n\n"
+	--center)
+
+if ! test -d $DESTINO ; then
+	if ! mkdir -p $DESTINO ; then
+		TEXTO="Error: No existe el directorio de destino <b>$DESTINO</b> y no se ha podido crear ...\n¿Problemas con permisos? (¿not root?)"
+		TITULO="Problemas con el directorio de Destino"
+		mensaje-error "$TITULO" "$TEXTO"
+	fi
+fi
+
+RESULTADO=""
+#yad --text "Se han seleccionado $# archivos y sus rutas son $*"
+INCREMENTO=$(echo 100/$NUMPARAM | bc)
+CONTADOR=0
+(
+echo "#Va a empezar a copiarse los archivos seleccionados a $DESTINO..."
+until [ -z "$1" ]
+do
+	echo "#Copiando el archivo: $1 a $DESTINO ..."
+	if /bin/cp -r "$1" "$DESTINO" ; then
+		RESULTADO="$RESULTADO\n$1 -> $DESTINO/$1"
+	else
+		TEXTO="  Error: No se ha podido copiar <b>$1</b> en <b>$DESTINO</b> ...\n  ¿Problemas con permisos? (¿not root?)"
+		TITULO="Problemas al copiar $1 en Destino"
+		mensaje-error "$TITULO" "$TEXTO"
+	fi
+	CONTADOR=$(expr $CONTADOR + $INCREMENTO)
+	echo $CONTADOR
+	shift
+done
+echo "#Ok!!! Ya se han terminado de copiar los archivos.  Como Resultado: $RESULTADO"
+echo "100"
+) | yad --title "Herramienta para Crear BACKUP de Archivos" \
+	--window-icon=/usr/share/lxpanel/images/vitalinux.svg \
+	--image /usr/share/icons/vitalinux/actions-scripts/png-icon.png \
+	--width 600 \
+	--center \
+	--progress --percentage=0 --button="Cerrar":0
+
+exit 0

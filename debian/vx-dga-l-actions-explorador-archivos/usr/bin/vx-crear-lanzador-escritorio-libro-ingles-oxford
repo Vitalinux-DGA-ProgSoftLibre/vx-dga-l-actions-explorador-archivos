@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# %f %w -> La ruta del archivo y de su directorio base
+file="$1"
+fileName="$2"
+USUARIO=$(whoami)
+
+function mensaje {
+	yad --title "$1" \
+	--window-icon "vitalinux-32x" \
+	--image "$3" \
+	--width 700 \
+	--center \
+	--text="  $2" --text-align="center" \
+	--button="Continuar":0
+}
+
+if ! desktopDir=$(xdg-user-dir DESKTOP) ; then
+	echo "El usuario no tiene un directorio de Escritorio definido ..."
+	exit 1
+fi
+
+if NIVEL=$(yad \
+	--window-icon vitalinux-64x \
+	--title "Crear Lanzador de Escritorio para Libro Inglés" \
+	--text "  Selecciona el <b>NIVEL</b> del libro digital de Inglés:  " \
+	--center \
+	--image libro-64x \
+	--form \
+	--field="Nivel":CB '1ºPrimaria!2ºPrimaria!3ºPrimaria!4ºPrimaria!5ºPrimaria!6ºPrimaria!1ºESO!2ºESO!3ºESO!4ºESO!1ºBachillerato!2ºBachillerato' \
+	--button="Crear Acceso en Escritorio":0 --button="Abortar":1 ) ; then
+
+	NIVEL=$(echo $NIVEL | cut -d"|" -f1)
+	desktopFileName="${desktopDir}/$NIVEL.desktop"
+	case "$NIVEL" in
+		"1ºPrimaria") RUTAICON="/usr/share/icons/vitalinux/ingles1.svg" ;;
+		"2ºPrimaria") RUTAICON="/usr/share/icons/vitalinux/ingles2.svg" ;;
+		"3ºPrimaria") RUTAICON="/usr/share/icons/vitalinux/ingles3.svg" ;;
+		"4ºPrimaria") RUTAICON="/usr/share/icons/vitalinux/ingles4.svg" ;;
+		"5ºPrimaria") RUTAICON="/usr/share/icons/vitalinux/ingles5.svg" ;;
+		"6ºPrimaria") RUTAICON="/usr/share/icons/vitalinux/ingles6.svg" ;;
+		"1ºESO") RUTAICON="/usr/share/icons/vitalinux/ingles1.svg" ;;
+		"2ºESO") RUTAICON="/usr/share/icons/vitalinux/ingles2.svg" ;;
+		"3ºESO") RUTAICON="/usr/share/icons/vitalinux/ingles3.svg" ;;
+		"4ºESO") RUTAICON="/usr/share/icons/vitalinux/ingles4.svg" ;;
+		"1ºBachillerato") RUTAICON="/usr/share/icons/vitalinux/ingles5.svg" ;;
+		"2ºBachillerato") RUTAICON="/usr/share/icons/vitalinux/ingles6.svg" ;;
+	esac
+else
+	mensaje "Creador de Lanzador de libro de Inglés en Escritorio" "La creación del Lanzador o Acceso Directo en el Escritorio para el libro de Inglés ha sido abortado por el usuario ..." "error"
+	exit 1
+fi
+
+if [ ! -f "$desktopFileName" ]; then
+
+cat > "${desktopFileName}" << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name="${fileName}"
+Exec="${file}"
+Icon=$RUTAICON
+Categories=Education;
+Type=Application
+Terminal=false
+EOF
+#echo -e "[Desktop Entry]\nVersion=1.0\nName=\"${fileName}\"\nExec=\"${file}\"\nTerminal=false\nType=Application\nCategories=Education;\nIcon=$RUTAICON" > "${desktopFileName}"
+
+	if test "$RUTAICON" == "" ; then
+		lxshortcut -i "${desktopFileName}"
+	fi
+	exit 0
+else
+	TITULO="Creador de Lanzador en Escritorio"
+	TEXTO="Error ... Ya existe en el Escritorio un lanzador a ${desktopFileName} ..."
+	mensaje "$TITULO" "$TEXTO" "error"
+	exit 1
+fi

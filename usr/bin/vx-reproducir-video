@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Obtenemos el número de parámetros recibidos: %F son el número de rutas absolutas de los archivos seleccionados
+NUMPARAM=$#
+# Creamos una lista con los parámetros recibidos $@.  El primer parametro es el ${PARAM[0]} ...  ${PARAM[*]} sería todos
+# La mitad de los parametros recibidos son las rutas absolutas de los archivos, y la otra mitad son sus extensiones
+declare -a PARAM
+PARAM=($@)
+RESULTADO=""
+DIRECTORIOBASE=$(dirname "$1")
+
+CONTADOR=0
+
+ANCHO=$(xrandr -q 2> /dev/null | grep \*\+ | tr -s " " " " | cut -d" " -f2 | cut -d"x" -f1 | head -1)
+ALTO=$(xrandr -q 2> /dev/null | grep \*\+ | tr -s " " " " | cut -d" " -f2 | cut -d"x" -f2 | head -1)
+echo "El ancho y alto detectados son: $ANCHO x $ALTO"
+MARGEN="45"
+
+until [ -z "$1" ] ; do
+
+	RELACIONASPECTOVIDEO=$(mplayer -really-quiet -ao null -vo null -identify -frames 0 "$1" | grep ID_VIDEO_ASPECT= | cut -d"=" -f2)
+	echo "La relación de aspecto de $1 es $RELACIONASPECTOVIDEO ..."
+
+	CASO43=$(echo "scale=2;sqrt(((4/3)-$RELACIONASPECTOVIDEO)^2)" | bc)
+	CASO169=$(echo "scale=2;sqrt(((16/9)-$RELACIONASPECTOVIDEO)^2)" | bc)
+
+	if test $(echo $CASO43 '<' $CASO169 | bc -l) -eq 1 ; then
+		# Resolución apropiada de 4x3
+		DIMENSIONVIDEOANCHO="240"
+		DIMENSIONVIDEOALTO="180"
+	else
+		# Resolución apropiada de 16x9
+		DIMENSIONVIDEOANCHO="240"
+		DIMENSIONVIDEOALTO="135"
+	fi
+	echo "Las dimensiones de la ventana reproductora serán $DIMENSIONVIDEOANCHO x $DIMENSIONVIDEOALTO"
+	echo El comando que se va a ejecutar es: mplayer -noborder -quiet -ontop -fps 15 \
+		-geometry ${DIMENSIONVIDEOANCHO}x${DIMENSIONVIDEOALTO}+$(echo "($ANCHO - $DIMENSIONVIDEOANCHO - $MARGEN)" | bc)+$(echo "($ALTO - $DIMENSIONVIDEOALTO - $MARGEN)" | bc) \
+		noaudio "$1"
+	mplayer -noborder -quiet -ontop -fps 15 \
+		-geometry ${DIMENSIONVIDEOANCHO}x${DIMENSIONVIDEOALTO}+$(echo "($ANCHO - $DIMENSIONVIDEOANCHO - $MARGEN)" | bc)+$(echo "($ALTO - $DIMENSIONVIDEOALTO - $MARGEN)" | bc) \
+		noaudio "$1"
+	shift
+done
+
+exit 0

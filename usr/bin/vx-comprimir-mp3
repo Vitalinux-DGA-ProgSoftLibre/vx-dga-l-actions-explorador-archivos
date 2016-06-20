@@ -1,0 +1,85 @@
+#!/bin/bash
+
+function mensaje {
+	yad --title "$1" \
+	--window-icon "vitalinux-32x" \
+	--image "$3" \
+	--width 700 \
+	--center \
+	--text="  $2" --text-align="center" \
+	--button="Continuar":0
+}
+
+# Obtenemos el número de parámetros recibidos: %F son el número de rutas absolutas de los archivos seleccionados
+NUMPARAM=$#
+# Creamos una lista con los parámetros recibidos $@.  El primer parametro es el ${PARAM[0]} ...  ${PARAM[*]} sería todos
+# La mitad de los parametros recibidos son las rutas absolutas de los archivos, y la otra mitad son sus extensiones
+declare -a PARAM
+PARAM=($@)
+RESULTADO=""
+#yad --text "Se han seleccionado $# archivos y sus rutas son $*"
+
+# Extraemos el primer parametro recibido: el directorio base del primer archivo (%d)
+DIRECTORIOBASE=$(dirname "$1")
+
+INCREMENTO=$(echo 100/$NUMPARAM | bc)
+CONTADOR=0
+NARCHIVO=1
+
+if ELECCION=$(yad \
+	--title "Selección de Calidad Resultante MP3" \
+	--image music-256x --window-icon vitalinux-256x \
+	--list --radiolist \
+	--column "Selección" --column "Nivel Compresión Kbps / Calidad de Audio" \
+	FALSE 192 FALSE 128 TRUE 64 FALSE 48 FALSE 32 \
+	--width 420 --height 250 --center \
+	--button="Comprimir MP3:0" --button="Salir:1") ; then
+
+	CALIDAD=$(echo $ELECCION | cut -d"|" -f2)
+	DIRECTORIODESTINO=MP3-comprimidos-$(date | tr -s " " " " | cut -f4 -d" " | tr -s ":" ".")
+	DESTINO="$DIRECTORIOBASE/$DIRECTORIODESTINO"
+
+	if ! mkdir "$DESTINO" ; then
+		yad --title "Error al crear Directorio Destino" \
+			--image music-256x --window-icon vitalinux-256x \
+			--width 550 --center \
+			--text "  <b>¡¡Problema!!</b> No tienes permiso para crear el directorio \n  destino donde almacenar los MP3 comprimidos en: \n\n  <b>$DESTINO</b> \n\n  Deberías mover los MP3 a comprimir a un directorio \n  donde tengas <b>permisos de Escritura</b> (p.e. Documentos)" \
+			--button="Salir:1"
+		exit 0
+	fi
+
+	(
+	echo "#Va a empezar a comprimirse los archivos MP3 seleccionados ..."
+	until [ -z "$1" ]
+	do
+		NOMBREARCHIVO=$(echo $1 | awk -F "/" '{print $NF}')
+		echo "#Comprimiendo Archivo MP3 $NARCHIVO de $NUMPARAM: $NOMBREARCHIVO - Calidad $CALIDAD Kbps..."
+
+		# dpkg -S lame : lame (se requiere ese paquete para esta utilidad)
+		if lame -b $CALIDAD "$1" $DESTINO"/""$NOMBREARCHIVO" ; then
+			RESULTADO="$RESULTADO\n$DESTINO/$NOMBREARCHIVO"
+		fi
+		CONTADOR=$(expr $CONTADOR + $INCREMENTO)
+		NARCHIVO=$(expr $NARCHIVO + 1)
+		echo $CONTADOR
+		shift
+	done
+	echo "#Ok!!! Ya se ha terminado de comprimir los Archivos MP3.  \nComo Resultado: $RESULTADO"
+	echo "100"
+	) | yad --title "Herramienta de compresión de archivos MP3: Calidad $CALIDAD Kbps" \
+		--window-icon vitalinux-32x \
+		--image mp3-32x \
+		--width 660 \
+		--center \
+		--progress --percentage=0 --button="Cerrar":0
+
+	exit 0
+
+else
+
+	TITULO="Compresor MP3"
+	TEXTO="Error ... La utilidad de compresión de archivos MP3 ha sido cancelada por el usuario ..."
+	mensaje "$TITULO" "$TEXTO" "error"
+	exit 1
+
+fi

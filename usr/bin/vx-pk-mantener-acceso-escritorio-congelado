@@ -1,0 +1,2 @@
+#!/bin/bash
+pkexec --user root /usr/bin/vx-mantener-acceso-escritorio-congelado "$1"

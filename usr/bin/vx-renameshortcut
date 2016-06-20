@@ -1,0 +1,10 @@
+#!/bin/bash
+
+newName=$(zenity --width 480 --height 160 --entry --title="Renombar Archivo"  --text="Introduce un nuevo nombre:" --entry-text "$2")
+if [[ -n "$newName" && ( "$newName" != "$2" ) ]]; then
+	cd "$1" && mv "$2" "$newName"
+	res=$?
+	if [[ $res != 0 ]] ; then
+    		zenity --error --text="Fallo en $1 al renombrarlo a $2 => $newName"
+	fi
+fi

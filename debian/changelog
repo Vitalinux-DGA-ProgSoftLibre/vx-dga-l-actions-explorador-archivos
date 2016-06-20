@@ -1,0 +1,15 @@
+vx-dga-l-actions-explorador-archivos (2.0-9) unstable; urgency=low
+
+  * Acciones de menú personalizables para nuestro explorador de archivos
+  * Adaptación de los scripts hechos por Vasian <no@email.com> de http://madebits.com
+  * He adaptado el script de crear acceso directo en Escritorio para libros digitales de inglés
+  * Acción añadida con la finalidad de mantener acceso directo en Escritorio Congelado
+  * Se modifican los permisos a 644 a los acccesos directos de /etc/skel/Desktop
+  * Utilidad para comprimir pdfs
+  * Se ha cambiado %B por %F para usar rutas absolutas de los archivos recibidos por las actions
+  * Se ha cambiado Desktop por Escritorio en la Action de Mantener Acceso en Escritorio Congelado
+  * Se ha eliminado el parametro %d del comprimir MP3
+  * Se ha creado una utilidad para reproducir vídeos en miniatura
+  * 2016-6-6: Se ha añadido una action para mandar archivos vía email
+
+ -- Arturo Martín <amartinromero@gmail.com>  Thu, 3 Mar 2016 12:53:06 +0200

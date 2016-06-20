@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Menu
+Icon[es_ES]=foto-64x
+Icon[es]=foto-64x
+Name[es_ES]=Utilidades Imágenes
+Name[es]=Utilidades Imágenes
+Comment=Pequeñas utilidades para la manipulación de Imágenes PNG, JPG, etc.
+Comment[es]=Pequeñas utilidades para la manipulación de Imágenes PNG, JPG, etc.
+Comment[es_ES]=Pequeñas utilidades para la manipulación de Imágenes PNG, JPG, etc.
+ItemsList=vx-actions-imagenes-comprimir-jpg;vx-actions-imagenes-comprimir-png;vx-actions-imagenes-info;vx-actions-imagenes-generar-thumbnails;vx-actions-imagenes-convertir

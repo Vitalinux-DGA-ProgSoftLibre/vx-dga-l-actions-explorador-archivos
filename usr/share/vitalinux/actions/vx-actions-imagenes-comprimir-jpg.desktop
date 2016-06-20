@@ -1,0 +1,21 @@
+[Desktop Entry]
+Type=Action
+ToolbarLabel[es]=Utilidad para Comprimir Imágenes JPG
+ToolbarLabel[es_ES]=Utilidad para Comprimir Imágenes JPG
+Tooltip[es_ES]=Utilidad para Comprimir Imágenes JPG
+Tooltip[es]=Utilidad para Comprimir Imágenes JPG
+Name[es]=Comprimir JPG
+Name[es_ES]=Comprimir JPG
+Profiles=profile-zero;
+
+Icon=jpeg-icon-64x
+Icon[es]=jpeg-icon-64x
+Icon[es_ES]=jpeg-icon-64x
+
+[X-Action-Profile profile-zero]
+MimeTypes=image/jpeg
+Exec=/usr/bin/vx-comprimir-jpg %F
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[es_ES]=Default profile
+

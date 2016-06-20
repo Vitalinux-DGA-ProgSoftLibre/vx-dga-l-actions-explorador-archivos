@@ -1,0 +1,10 @@
+Package: vx-dga-l-actions-explorador-archivos
+Version: 2.0-9
+Architecture: all
+Maintainer: Arturo Martín <amartinromero@gmail.com>
+Installed-Size: 943
+Depends: yad, udisks, zenity (>= 3.8.0), trash-cli (>= 0.12.7), pdftk, ghostscript, bc, pngnq, exiftool, lame, vx-dga-l-iconos, jpegoptim, php5-cli
+Section: utils
+Priority: extra
+Description: Acciones de menú personalizables para nuestro explorador de archivos
+ Acciones o scripts personalizados accesibles pulsando con el botón derecho del ratón sobre un elemento del explorador de archivos

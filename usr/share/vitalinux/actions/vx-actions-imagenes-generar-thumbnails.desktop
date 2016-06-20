@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Action
+ToolbarLabel[es]=Utilidad que nos permite reducir imágnes a un tamaño deseado
+ToolbarLabel[es_ES]=Utilidad que nos permite reducir imágnes a un tamaño deseado
+Tooltip[es_ES]=Utilidad que nos permite reducir imágnes a un tamaño deseado
+Tooltip[es]=Utilidad que nos permite reducir imágnes a un tamaño deseado
+Name[es]=Crear Imagen en Miniatura
+Name[es_ES]=Crear Imagen en Miniatura
+Profiles=profile-zero;
+
+Icon[es]=foto-ancho-64x
+Icon[es_ES]=foto-ancho-64x
+
+[X-Action-Profile profile-zero]
+MimeTypes=image/bmp;image/gif;image/jpeg;image/png;image/svg+xml;image/tiff
+Exec=/usr/bin/vx-generar-thumbnails %F
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[es_ES]=Default profile
+

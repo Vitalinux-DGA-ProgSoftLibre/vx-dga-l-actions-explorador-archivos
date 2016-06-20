@@ -1,0 +1,121 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+## Para llamar al programa: ./mandar-email-python3 "Mi asunto" "/home/arturo/Descargas/salida.txt"
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from smtplib import SMTP
+import smtplib
+import time
+from time import gmtime, strftime
+import sys
+import os
+import locale
+from os.path import basename
+
+if len(sys.argv) < 2 :
+  os.system('clear')
+  print "\n\nNo has pasado los parámetros correctamente: "
+  texto = "  Sintaxis de Uso:  "
+  print texto.center(100,"=")
+  print "mandar-correo emisor@gmail.com password-gmail asunto archivo-a-mandar-1 archivo-a-mandar-2 ...\n\n"
+  sys.exit(1)
+
+emisor = str(sys.argv[1])
+passemisor = str(sys.argv[2])
+
+#recipients = ['amartinromero@gmail.com','sannacho@gmail.com']
+ruta = os.environ['HOME'] + "/.vx-dga.d/mandar-correo/"
+ruta_destinatarios = ruta + "destinatarios-email.txt"
+##ruta_destinatarios = "destinatarios-email.txt"
+destinatarios = open(ruta_destinatarios, 'r')
+
+recipients = []
+for linea in destinatarios:
+  #print(linea)
+  if linea.count("@") > 0 :
+    recipients.extend ([linea.rstrip('\n')])
+# Cerramos el fichero.
+destinatarios.close()
+
+print "Los destinatarios va a ser %s" % recipients[0:]
+#recipients = ['amartinromero@gmail.com']
+emaillist = [elem.strip().split(',') for elem in recipients]
+msg = MIMEMultipart()
+
+#msg['From'] = 'amartinromero@gmail.com'
+#msg['Reply-to'] = 'amartinromero@gmail.com'
+msg['From'] = str(sys.argv[1])
+msg['Reply-to'] = str(sys.argv[1])
+
+# Rescatamos el asunto localizado en el cuarto argumento, [0]->nombre programa, [1]-> email del emisor, [2] -> password, [3] -> asunto del email, y los purgamos:
+msg['Subject'] = str(sys.argv[3])
+listaarchivos = sys.argv[4:]
+# sys.argv.pop([0:3])
+del sys.argv[:4]
+#sys.argv.pop(0)
+#sys.argv.pop(0)
+#sys.argv.pop(0)
+#sys.argv.pop(0)
+ 
+msg.preamble = 'Multipart massage.\n'
+
+#locale.setlocale(locale.LC_TIME, "es_ES")
+ahora = time.strftime("%c")
+textohtml = """\
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<fieldset style='background-color: Aqua; color: Crimson;'>
+<h3 style='text-align: center;'>
+Archivos enviados via Gmail desde 
+<span style='color: orange'><b> Vitalinux </b></span>
+<br> %s </h3>
+Se adjuntan los archivos seleccionados por el remitente: %s
+<br><br>
+Listado de Archivos Enviados: <br>
+<b> %s </b>
+<br><br>
+<b>
+<span style='text-align: center; margin-left: auto; margin-right: auto; color: Indigo;'>
+Autores: Equipo Tecnico Vitalinux
+</span>
+</b>
+</fieldset>
+""" % (ahora,msg['From'],sys.argv[0:])
+
+# part = MIMEText("...",'plain')
+part = MIMEText(textohtml,'html')
+msg.attach(part)
+
+# A continuacion adjuntamos los archivos pasados como argumentos:
+while sys.argv :
+  part = MIMEApplication(
+                open(str(sys.argv[0]),"rb").read(),
+                Name=basename(str(sys.argv[0]))
+            )
+  part['Content-Disposition'] = 'attachment; filename="%s"' % basename(str(sys.argv[0]))
+  if msg.attach(part) :
+    print "Se a adjuntado el archivo: %s" % sys.argv[0]
+  # Purgamos el archivo adjuntado y vamos a por el siguiente:
+  sys.argv.pop(0)
+
+try:
+  server = smtplib.SMTP("smtp.gmail.com:587")
+  server.ehlo()
+  server.starttls()
+  server.login(emisor,passemisor)
+  server.sendmail(msg['From'], emaillist , msg.as_string())
+  print "Ok!!! Ya se han Enviado los Archivos: \n\n--> %s \n\nA los destinatarios:\n\n--> %s" % (listaarchivos,emaillist)
+  #archivosalida="/tmp/salida-mandar-email-%s" % strftime("%H%M%S-%d-%b-%Y", gmtime())
+  archivosalida="/tmp/salida-mandar-email"
+  salida = open(archivosalida,'w')
+  salida.write("Ok!!! Ya se han Enviado los Archivos: \n--> %s \n\nA los destinatarios:\n--> %s \n" % (listaarchivos,emaillist))
+  salida.close()
+
+except :
+  print "Hay algo que impide que el email se envíe ... \nTal vez haya algún firewall o tengas problemas de conexión ... \n¡¡Comprueba tu conexión con Internet!!\n¡¡Comprueba el login o password de GMAIL!! ... \n"
+  archivosalida="/tmp/salida-mandar-email"
+  salida = open(archivosalida,'w')
+  salida.write("Hay algo que impide que el email se envíe ... \nTal vez haya algún firewall o tengas problemas de conexión ... \n¡¡Comprueba tu conexión con Internet!!\n¡¡Comprueba el login o password de GMAIL!! ... \n")
+  salida.close()
+#server.close()
+server.quit()

@@ -1,0 +1,80 @@
+#!/bin/bash
+
+function mensaje {
+	yad --title "$1" \
+	--window-icon "vitalinux-32x" \
+	--image "$3" \
+	--width 700 \
+	--center \
+	--text="  $2" --text-align="center" \
+	--button="Continuar":0
+}
+
+# Obtenemos el número de parámetros recibidos: %F son el número de rutas absolutas de los archivos seleccionados
+NUMPARAM=$#
+# Creamos una lista con los parámetros recibidos $@.  El primer parametro es el ${PARAM[0]} ...  ${PARAM[*]} sería todos
+# La mitad de los parametros recibidos son las rutas absolutas de los archivos, y la otra mitad son sus extensiones
+declare -a PARAM
+PARAM=($@)
+RESULTADO=""
+#yad --text "Se han seleccionado $# archivos y sus rutas son $*"
+DIRECTORIOBASE=$(dirname "$1")
+DIRECTORIODESTINO="${DIRECTORIOBASE}/Imagenes-Thumbnails-$(date | tr -s ' ' ' ' | cut -f4 -d' ' | tr -s ':' '.')"
+
+if ELECCION=$(yad \
+	--title "Selección de Anchura de las Imágenes resultantes" \
+	--window-icon vitalinux-64x \
+	--text-align center \
+	--text "\nDebes Seleccionar la <b>Anchura en pixels</b> que deseas para las imagenes en pequeño o thumbnails resultantes.\nLas imágenes resultantes, una vez terminado el proceso, las encontrarás en un subdirectorio que se creará para ello llamado <b>$DIRECTORIODESTINO</b> ...\n" \
+	--image foto-ancho-128x \
+	--width 500 --height 250 --center \
+	--form \
+	--field="Anchura en Pixels":CB '16!32!64!128!256!512!1024' \
+	--button="Continuar Redimensionando Imágenes":0 --button="Abortar":1 ) ; then
+
+	ANCHO=$(echo $ELECCION | cut -d"|" -f1)
+	mkdir $DIRECTORIODESTINO
+	INCREMENTO=$(echo 100/$NUMPARAM | bc)
+	CONTADOR=0
+	NARCHIVO=1
+	(
+	echo "#Va a empezar a reducirse el tamaño de las imágenes seleccionadas ..."
+	until [ -z "$1" ]
+	do
+
+		NOMBREARCHIVO=$(echo $1 | awk -F"/" '{ print $NF }')
+		DIRECTORIOBASE=$(echo $1 | awk -F"$NOMBREARCHIVO" '{ print $1 }')
+		echo "#Reduciendo la imágen $NARCHIVO de $NUMPARAM: $NOMBREARCHIVO - Ancho: $ANCHO Pixels..."
+
+		# dpkg -S convert : imagemagick (se requiere ese paquete para esta utilidad)
+		if convert "$1" -resize ${ANCHO}x "${DIRECTORIODESTINO}/mini-${ANCHO}x-$NOMBREARCHIVO" ; then
+			RESULTADO="$RESULTADO\n$1 - > ${DIRECTORIODESTINO}/mini-${ANCHO}x-$1"
+		else
+			TITULO="Generador de Imágenes en Miniatura o Thumbnails"
+			TEXTO="Error ... Problema al reducir la imagen $1 a ${ANCHO} y dejarla en ${DIRECTORIODESTINO}/mini-$NOMBREARCHIVO ..."
+			mensaje "$TITULO" "$TEXTO" "error"
+		fi
+		CONTADOR=$(expr $CONTADOR + $INCREMENTO)
+		NARCHIVO=$(expr $NARCHIVO + 1)
+		echo $CONTADOR
+		shift
+	done
+	echo "#Ok!!! Ya se ha terminado de reducir las imágenes.  Como Resultado: $RESULTADO"
+	echo "100"
+	) | yad --title "Generador de Imágenes en Miniatura o Thumbnails: Ancho $ANCHO Pixels" \
+		--window-icon vitalinux-32x \
+		--image foto-128x \
+		--width 720 \
+		--center \
+		--progress --percentage=0 --button="Cerrar":0
+
+	exit 0
+
+else
+
+	TITULO="Generador de Imágenes en Miniatura o Thumbnails"
+	TEXTO="Error ... La utilidad de generar imágenes en miniatura ha sido cancelada por el usuario ..."
+	mensaje "$TITULO" "$TEXTO" "error"
+	exit 1
+
+fi

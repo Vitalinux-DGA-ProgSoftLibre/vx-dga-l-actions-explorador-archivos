@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Action
+ToolbarLabel[es]=Utilidad que permite crear un Acceso o Lanzador en el Escritorio al archivo Seleccionado
+ToolbarLabel[es_ES]=Utilidad que permite crear un Acceso o Lanzador en el Escritorio al archivo Seleccionado
+Tooltip[es]=Utilidad que permite crear un Acceso o Lanzador en el Escritorio al archivo Seleccionado
+Tooltip[es_ES]=Utilidad que permite crear un Acceso o Lanzador en el Escritorio al archivo Seleccionado
+Name[es]=Crear Acceso en Escritorio
+Name[es_ES]=Crear Acceso en Escritorio
+Profiles=profile-zero;
+
+Icon[es]=add
+Icon[es_ES]=add
+
+[X-Action-Profile profile-zero]
+MimeTypes=application/octet-stream;text/x-shellscript;application/x-executable;application/x-perl;application/x-*
+Exec=/usr/bin/vx-crear-lanzador-escritorio %f %w
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[C]=Default profile
+Name[es_ES]=Default profile

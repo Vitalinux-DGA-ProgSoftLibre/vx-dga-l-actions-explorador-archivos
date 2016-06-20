@@ -1,0 +1,70 @@
+#!/bin/bash
+
+function salir {
+yad --title "Herramienta de Compresión de imágenes JPG" \
+	--window-icon vitalinux-32x \
+	--image comprimir-64x \
+	--width 500 \
+	--center --text-align center \
+	--text "  $1  " \
+	--button="Salir":1
+exit 1
+}
+# Obtenemos el número de parámetros recibidos: %F son el número de rutas absolutas de los archivos seleccionados
+NUMPARAM=$#
+# Creamos una lista con los parámetros recibidos $@.  El primer parametro es el ${PARAM[0]} ...  ${PARAM[*]} sería todos
+# La mitad de los parametros recibidos son las rutas absolutas de los archivos, y la otra mitad son sus extensiones
+declare -a PARAM
+PARAM=($@)
+RESULTADO=""
+DIRECTORIOBASE=$(dirname "$1")
+
+INCREMENTO=$(echo 100/$NUMPARAM | bc)
+CONTADOR=0
+
+#yad --text "Se han seleccionado $# archivos y sus rutas son $*"
+echo "" > /tmp/res-comp-jpg
+
+if RESPUESTA=$(yad \
+	--title "Herramienta de Compresión de imágenes JPG" \
+	--window-icon vitalinux-32x \
+	--image comprimir-64x \
+	--width 500 \
+	--center --text-align center \
+	--text "  Indica un <b>Destino</b> para los archivos JPG comprimidos y la <b>Calidad deseada resultante</b> ...  " \
+	--form \
+	--field="Subdirectorio Destino: " "Comp-JPG-$(date | tr -s ' ' ' ' | cut -f4 -d' ' | tr -s ':' '.')"\
+	--field="Calidad Resultante: ":SCL "50" \
+	--button="Continuar Comprimiendo":0 --button="Abortar":1) ; then
+
+	DESTINO=$(echo $RESPUESTA | cut -d"|" -f1)
+	CALIDAD=$(echo $RESPUESTA | cut -d"|" -f2)
+
+	if ! test -d "$DIRECTORIOBASE/$DESTINO" ; then
+		if ! mkdir "$DIRECTORIOBASE/$DESTINO" ; then
+			salir "Ha habido algún problema: No tienes permiso para crear la carpeta destino ..."
+		fi
+	fi
+	# dpkg -S jpegoptim : jpegoptim (se requiere ese paquete para esta utilidad)
+	(
+	echo "#Se van a comprimir las imagenes seleccionadas ..."
+	until [ -z "$1" ] ; do
+		NOMBRE="$(echo $1 | awk -F '/' '{ print $NF }' | awk -F '[.][jJ][pP][gG]|[.][jJ][pP][eE][gG]' '{ print $1 }')"
+		#NOMBRE="$(echo $1 | awk -F '/' '{ print $NF }'| awk -F '[.][jJ][pP][eE]?[gG]' '{ print $1 }')"
+		jpegoptim -t -m$CALIDAD --dest="$DIRECTORIOBASE/$DESTINO" "$1" | tee /tmp/res-comp-jpg | sed -e "s/^.*$/#&/g"
+		SALIDA="$SALIDA\n"$(cat /tmp/res-comp-jpg | grep "$NOMBRE")
+		CONTADOR=$(expr $CONTADOR + $INCREMENTO)
+		echo $CONTADOR
+		shift
+	done
+	echo "#Ok!!! Ya se ha terminado de comprimir los Archivos JPG. \nArchivos resultantes en: $DIRECTORIOBASE/$DESTINO \n$SALIDA "
+	echo "100"
+	) | yad --title "Herramienta de compresión de archivos JPG" \
+		--window-icon vitalinux-32x \
+		--image png-icon-64x \
+		--width 720 \
+		--center \
+		--progress --pulsate --button="Cerrar":0
+fi
+
+exit 0

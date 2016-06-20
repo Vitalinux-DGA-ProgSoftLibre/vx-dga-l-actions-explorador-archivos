@@ -1,0 +1,49 @@
+#!/bin/bash
+
+
+function mensaje-error {
+
+	yad --title "Utilidad Backup de Fichero" \
+	--window-icon=/usr/share/lxpanel/images/vitalinux.svg \
+	--image document-save-as \
+	--width 600 \
+	--center \
+   --text="  Error: No se ha podido crear el backup de $1 ...  \n¿Problemas con permisos? (¿not root?)" \
+	--button="Continuar":0
+
+}
+
+# Obtenemos el número de parámetros recibidos: %F son el número de rutas absolutas de los archivos seleccionados
+NUMPARAM=$#
+# Creamos una lista con los parámetros recibidos $@.  El primer parametro es el ${PARAM[0]} ...  ${PARAM[*]} sería todos
+# La mitad de los parametros recibidos son las rutas absolutas de los archivos, y la otra mitad son sus extensiones
+declare -a PARAM
+PARAM=($@)
+RESULTADO=""
+#yad --text "Se han seleccionado $# archivos y sus rutas son $*"
+INCREMENTO=$(echo 100/$NUMPARAM | bc)
+CONTADOR=0
+(
+echo "#Va a empezar a crearse el backup de los archivos seleccionados ..."
+until [ -z "$1" ]
+do
+	echo "#Creando el BACKUP del archivo: $1 ...\nEl archivo comprimido resultante se llamará $1.$(date +%Y%m%d-%H%M%S).bak ..."
+	if /bin/cp "$1" "$1.$(date +%Y%m%d-%H%M%S).bak" ; then
+		RESULTADO="$RESULTADO\n$1 -> $1.$(date +%Y%m%d-%H%M%S).bak"
+	else
+		mensaje-error "$1"
+	fi
+	CONTADOR=$(expr $CONTADOR + $INCREMENTO)
+	echo $CONTADOR
+	shift
+done
+echo "#Ok!!! Ya se ha terminado de crear el Backup de los archivos.  Como Resultado: $RESULTADO"
+echo "100"
+) | yad --title "Herramienta para Crear BACKUP de Archivos" \
+	--window-icon=/usr/share/lxpanel/images/vitalinux.svg \
+	--image /usr/share/icons/vitalinux/actions-scripts/png-icon.png \
+	--width 600 \
+	--center \
+	--progress --percentage=0 --button="Cerrar":0
+
+exit 0

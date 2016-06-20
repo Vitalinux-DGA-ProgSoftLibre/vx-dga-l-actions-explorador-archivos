@@ -1,0 +1,21 @@
+[Desktop Entry]
+Type=Action
+ToolbarLabel[es]=Utilidad para Comprimir Música MP3
+ToolbarLabel[es_ES]=Utilidad para Comprimir Música MP3
+Tooltip[es_ES]=Utilidad para Comprimir Música MP3
+Tooltip[es]=Utilidad para Comprimir Música MP3
+Name[es]=Comprimir MP3
+Name[es_ES]=Comprimir MP3
+Profiles=profile-zero;
+
+Icon=mp3-128x
+Icon[es]=mp3-128x
+Icon[es_ES]=mp3-128x
+
+[X-Action-Profile profile-zero]
+MimeTypes=audio/mpeg;audio/mpeg3;audio/x-mpeg-3;video/mpeg;video/x-mpeg
+Exec=/usr/bin/vx-comprimir-mp3 %F
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[es_ES]=Default profile
+

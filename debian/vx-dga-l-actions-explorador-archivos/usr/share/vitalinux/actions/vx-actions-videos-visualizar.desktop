@@ -1,0 +1,21 @@
+[Desktop Entry]
+Type=Action
+ToolbarLabel[es]=Utilidad para Reproducir Vídeos en Miniatura
+ToolbarLabel[es_ES]=Utilidad para Reproducir Vídeos en Miniatura
+Tooltip[es_ES]=Utilidad para Reproducir Vídeos en Miniatura
+Tooltip[es]=Utilidad para Reproducir Vídeos en Miniatura
+Name[es]=Reproducir Vídeo en Miniatura
+Name[es_ES]=Reproducir Vídeo en Miniatura
+Profiles=profile-zero;
+
+Icon=reproducir-video-128x
+Icon[es]=reproducir-video-128x
+Icon[es_ES]=reproducir-video-128x
+
+[X-Action-Profile profile-zero]
+MimeTypes=video/x-flv;video/mp4;video/3gpp;video/quicktime;video/x-msvideo;video/x-ms-wmv;video/msvideo,;video/mpeg;video/quicktime;video/animaflex;video/x-ms-asf;video/x-ms-asf;video/x-ms-asf-plugin;application/x-troff-msvideo;video/avi;video/msvideo;video/x-msvideo;video/avs-video;video/x-dv;video/dl;video/x-dl;video/x-dv;video/fli;video/x-fli;video/x-atomic3d-feature;video/gl;video/x-gl;video/x-isvideo;video/mpeg;video/mpeg;video/x-motion-jpeg;video/quicktime;video/quicktime;video/x-sgi-movie;video/mpeg;video/x-mpeg;video/x-mpeq2a;video/mpeg;video/x-mpeg;video/mpeg;video/mpeg;video/mpeg;video/mpeg;video/x-sgi-movie;video/quicktime;video/x-qtc;video/vnd.rn-realvideo;video/x-scm;video/vdo;video/vivo;video/vnd.vivo;video/vivo;video/vnd.vivo;video/vosaic;video/x-amt-demorun;video/x-amt-showrun;
+Exec=/usr/bin/vx-reproducir-video %F
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[es_ES]=Default profile
+

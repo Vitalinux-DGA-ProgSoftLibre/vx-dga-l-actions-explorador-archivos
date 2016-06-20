@@ -1,0 +1,76 @@
+#!/bin/bash
+
+function mensaje-error {
+	MENSAJE="$1"
+	yad --title "Utilidad para Unir PDFs" \
+		--window-icon=/usr/share/lxpanel/images/vitalinux.svg \
+		--image /usr/share/icons/vitalinux/actions-scripts/pdf.png \
+		--text " $1 " --center --width="600" --button="Salir":1
+	exit
+}
+
+# Obtenemos el número de parámetros recibidos: %F son el número de rutas absolutas de los archivos seleccionados
+NUMPARAM=$#
+if test $NUMPARAM -lt 2 ; then
+	mensaje-error "Error!! Deberías seleccionar al menos 2 o más archivos PDFs ..."
+fi
+
+DIRECTORIOBASE=$(dirname "$1")
+DESTINO="$DIRECTORIOBASE/resultado-union-pdfs.pdf"
+
+: '
+TEXTO="    \n<b>Nota:</b> Indica el <span foreground='blue'><b>Nombre del Archivo y el Directorio</b></span> donde quieres dejar el Resultado de Unir los PDFs seleccionados...\n"
+while test "$DESTINO" == "" -o -d "$DESTINO" -o -f "$DESTINO" ; do
+	DESTINO=$(yad --title "Selecciona el Nombre del Archivo y el Directorio" \
+	--window-icon=/usr/share/lxpanel/images/vitalinux.svg \
+	--file --save \
+	--width 800 --height 300 --fullscreen \
+	--center \
+	--text "$TEXTO" --text-align="center")
+	TEXTO="    <b>Importante:</b> Debes indicar <span foreground='red'><b>un archivo que no exita ya en el sistema</b></span> ...\n    <b>¡¡No puedes dejar el nombre en blanco!!</b>"
+done
+
+if ! (echo "$DESTINO" | grep "[.][pP][dD][fF]" &> /dev/null) ; then
+	NOMBREDESTINO="$DESTINO".pdf
+else
+	NOMBREDESTINO="$DESTINO"
+fi
+'
+
+# Creamos una lista con los parámetros recibidos $@.  El primer parametro es el ${PARAM[0]} ...  ${PARAM[*]} sería todos
+# La mitad de los parametros recibidos son las rutas absolutas de los archivos, y la otra mitad son sus extensiones
+declare -a PARAM
+PARAM=($@)
+
+RESULTADO="#A continuación van a unirse los PDFs seleccionados:"
+#yad --text "Se han seleccionado $# archivos y sus rutas son $*"
+(
+
+PRIMERARCHIVO="$1"
+cp $PRIMERARCHIVO /tmp/auxiliar-unir-pdfs.pdf
+shift
+RESULTADO="$RESULTADO\n$PRIMERARCHIVO"
+
+until [ -z "$1" ] ; do
+
+	RESULTADO="$RESULTADO\n$1"
+	echo "$RESULTADO"
+
+	if /usr/bin/pdftk /tmp/auxiliar-unir-pdfs.pdf "$1" output "$DESTINO" ; then
+		echo "$RESULTADO\nDe momento ... ¡¡Todo Ok!!"
+	fi
+	cp $DESTINO /tmp/auxiliar-unir-pdfs.pdf
+	shift
+
+done
+
+RESULTADO="$RESULTADO\n\nEl resultado de la unión lo tienes en: $DESTINO"
+echo "$RESULTADO"
+
+) | yad --title "Herramienta de compresión de archivos PDFs" \
+	--window-icon=/usr/share/lxpanel/images/vitalinux.svg \
+	--width 600 \
+	--center \
+	--progress --pulsate
+
+exit 0

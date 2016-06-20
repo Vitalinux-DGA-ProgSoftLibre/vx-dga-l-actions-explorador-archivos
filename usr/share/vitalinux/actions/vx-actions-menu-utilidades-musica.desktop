@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Menu
+Icon[es_ES]=music-128x
+Icon[es]=music-128x
+Name[es_ES]=Utilidades Música
+Name[es]=Utilidades Música
+Comment=Pequeñas utilidades para la manipulación de Archivos de Música MP3, WAV, etc.
+Comment[es]=Pequeñas utilidades para la manipulación de Archivos de Música MP3, WAV, etc.
+Comment[es_ES]=Pequeñas utilidades para la manipulación de Archivos de Música MP3, WAV, etc.
+ItemsList=vx-actions-musica-comprimir-mp3;

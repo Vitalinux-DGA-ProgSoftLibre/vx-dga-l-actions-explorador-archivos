@@ -1,0 +1,22 @@
+#!/bin/bash
+ACCESO="$1"
+USER=$(whoami)
+
+if test $USER = "root" ; then
+	for RUTA in /etc/skel/Desktop /etc/skel/Escritorio ; do
+		if test -d $RUTA ; then
+			if cp "$ACCESO" $RUTA ; then
+				chmod 644 $RUTA/*
+				yad --text "  El acceso directo permanecerá  \n  en el Escritorio Congelado  " \
+				--button="Salir:0" --title "Acción Realizada OK" \
+				--center \
+				--image vitalinux-256x --window-icon vitalinux-256x
+			fi
+		fi
+	done
+else
+		yad --text "  No tienes permiso para configurar esta acción!!!  " \
+		--button="Salir:0" --title "Denegación de Acción" --center \
+		--image vitalinux-256x \
+		--window-icon vitalinux-256x
+fi

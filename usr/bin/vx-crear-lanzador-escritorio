@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# %f %w -> La ruta del archivo y de su directorio base
+file="$1"
+fileName="$2"
+USUARIO=$(whoami)
+
+function mensaje {
+	yad --title "$1" \
+	--window-icon "vitalinux-32x" \
+	--image "$3" \
+	--width 700 \
+	--center \
+	--text="  $2" --text-align="center" \
+	--button="Continuar":0
+}
+
+if ! desktopDir=$(xdg-user-dir DESKTOP) ; then
+	echo "El usuario no tiene un directorio de Escritorio definido ..."
+	exit 1
+fi
+
+RUTAICON=""
+desktopFileName="${desktopDir}/${fileName}.desktop"
+
+if [ ! -f "$desktopFileName" ]; then
+
+cat > "${desktopFileName}" << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name="${fileName}"
+Exec="${file}"
+Icon=$RUTAICON
+Categories=Education;
+Type=Application
+Terminal=false
+EOF
+#echo -e "[Desktop Entry]\nVersion=1.0\nName=\"${fileName}\"\nExec=\"${file}\"\nTerminal=false\nType=Application\nCategories=Education;\nIcon=$RUTAICON" > "${desktopFileName}"
+
+	if test "$RUTAICON" == "" ; then
+		TITULO="Creador de Lanzador en Escritorio"
+		TEXTO="Ok ... Se ha creado el lanzador, pero no tiene un icono \nasignado para ${desktopFileName} ...\nA continuación podrás personalizar ese icono entre otras cosas ..."
+		mensaje "$TITULO" "$TEXTO" "mano-ok-64x"
+		lxshortcut -i "${desktopFileName}"
+	fi
+	exit 0
+else
+	TITULO="Creador de Lanzador en Escritorio"
+	TEXTO="Error ... Ya existe en el Escritorio un lanzador a ${desktopFileName} ..."
+	mensaje "$TITULO" "$TEXTO" "error"
+	exit 1
+fi

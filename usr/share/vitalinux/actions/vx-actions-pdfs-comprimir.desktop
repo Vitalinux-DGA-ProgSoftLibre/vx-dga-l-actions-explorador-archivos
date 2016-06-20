@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Action
+ToolbarLabel[es]=Utilidad para Comprimir PDFs
+ToolbarLabel[es_ES]=Utilidad para Comprimir PDFs
+Name[es]=Comprimir PDF
+Name[es_ES]=Comprimir PDF
+Profiles=profile-zero;
+
+Icon=pdf-64x
+Icon[es]=pdf-64x
+Icon[es_ES]=pdf-64x
+
+[X-Action-Profile profile-zero]
+MimeTypes=application/pdf;application/x-pdf
+Exec=/usr/bin/vx-comprimir-pdfs %F
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[es_ES]=Default profile
+
