@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=Action
 Profiles=profile-zero
-Name[es]=Desmontar USB
-Name[C]=Desmontar USB
-Tooltip[es]=Desmontar USB de forma segura
-Tooltip[C]=Desmontar USB de forma segura
-ToolbarLabel[es]=Desmontar USB
-ToolbarLabel[C]=Desmontar USB
+Name[es]=Quitar USB
+Name[C]=Quitar USB
+Tooltip[es]=Quitar USB de forma segura
+Tooltip[C]=Quitar USB de forma segura
+ToolbarLabel[es]=Quitar USB
+ToolbarLabel[C]=Quitar USB
 
 Icon[es]=umount-usb-64x
 Icon[es_ES]=umount-usb-64x
@@ -14,6 +14,6 @@ Icon[es_ES]=umount-usb-64x
 [X-Action-Profile profile-zero]
 MimeTypes=inode/directory;all/allfiles
 Exec=/usr/bin/vx-desmontar-usb
-Name[es]=Desmontar USB
-Name[C]=Desmontar USB
+Name[es]=Quitar USB
+Name[C]=Quitar USB
 

@@ -7,6 +7,6 @@ Standards-Version: 3.9.2
 
 Package: vx-dga-l-actions-explorador-archivos
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, yad, udisks, zenity (>= 3.8.0), trash-cli (>=0.12.7), pdftk, ghostscript, bc, pngnq, exiftool, lame, vx-dga-l-iconos, jpegoptim, php5-cli
+Depends: ${shlibs:Depends}, ${misc:Depends}, yad, zenity (>= 3.8.0), trash-cli (>=0.12.7), pdftk, ghostscript, bc, pngnq, exiftool, lame, vx-dga-l-iconos, jpegoptim, php5-cli
 Description: Acciones de menú personalizables para nuestro explorador de archivos
  Acciones o scripts personalizados accesibles pulsando con el botón derecho del ratón sobre un elemento del explorador de archivos

@@ -1,4 +1,4 @@
-vx-dga-l-actions-explorador-archivos (2.0-9) unstable; urgency=low
+vx-dga-l-actions-explorador-archivos (2.0-10) unstable; urgency=low
 
   * Acciones de menú personalizables para nuestro explorador de archivos
   * Adaptación de los scripts hechos por Vasian <no@email.com> de http://madebits.com
@@ -11,5 +11,6 @@ vx-dga-l-actions-explorador-archivos (2.0-9) unstable; urgency=low
   * Se ha eliminado el parametro %d del comprimir MP3
   * Se ha creado una utilidad para reproducir vídeos en miniatura
   * 2016-6-6: Se ha añadido una action para mandar archivos vía email
+  * 2016-11-3: Se soluciona un bug en la accion de desmontaje, para usar udisk2 en lugar de udisk
 
  -- Arturo Martín <amartinromero@gmail.com>  Thu, 3 Mar 2016 12:53:06 +0200

@@ -73,10 +73,10 @@ class USBsGUI:
 	def delete_callback(self, widget, data=None):
 		(model_usb, iter_usb) = self.ubs_treeview.get_selection().get_selected()
 		usb=model_usb.get_value(iter_usb,0)
-		command='udisks --unmount {0}'.format(usb)
+		command='udisksctl unmount -b {0}'.format(usb)
 		##command='umount {0}'.format(usb)
 		os.system(command)
-		command='udisks --detach {0}'.format(usb)
+		command='udisksctl power-off -b {0}'.format(usb)
 		ok=os.system(command)
 		self.reload_callback(widget)
 		if ok!=0:

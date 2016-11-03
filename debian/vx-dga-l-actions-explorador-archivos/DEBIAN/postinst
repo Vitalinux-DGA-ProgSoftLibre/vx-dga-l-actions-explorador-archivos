@@ -49,7 +49,12 @@ function generar-iconos {
 
 case "$1" in
     configure)
-
+	 if [ -n "$2" ]; then
+  		## Si viene de un upgrade, queremos borrar el fichero de polkit
+  		if [ -f /etc/polkit-1/localauthority/50-local.d/montajes.pkla ] ; then
+  			rm -f /etc/polkit-1/localauthority/50-local.d/montajes.pkla
+  		fi
+	fi
 	generar-iconos "videos" "reproducir-video" "mandar-por-email"
 
 	if update-icon-caches /usr/share/vitalinux/iconos ; then

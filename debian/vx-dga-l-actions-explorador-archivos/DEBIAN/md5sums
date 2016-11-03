@@ -7,7 +7,7 @@ b08bb9e5dc87b28e06a4c3f6cf636087  usr/bin/vx-convertir-imagenes
 850bf738e008915ab833db9f00ab9706  usr/bin/vx-copiar-archivos-a-destino
 7fe04d0b242a28ece2940fed69183252  usr/bin/vx-crear-lanzador-escritorio
 919e4e89221c5d81de9c29b33883fd15  usr/bin/vx-crear-lanzador-escritorio-libro-ingles-oxford
-e25b9dc8e8be789c33fe4773a13e8cd4  usr/bin/vx-desmontar-usb
+e28cf2c93af0f18a1b8136669452b99a  usr/bin/vx-desmontar-usb
 d935bfffdffaa291c5cb21200bd0f659  usr/bin/vx-extraer-paginas-pdfs
 ed90bfbe61a3f031fa9d2deb55b17036  usr/bin/vx-generar-thumbnails
 9787b18eff825aa27f1d7496946ab0f5  usr/bin/vx-imagenes-info
@@ -18,7 +18,7 @@ ed90bfbe61a3f031fa9d2deb55b17036  usr/bin/vx-generar-thumbnails
 751bc7bd9fff5c2cfb42284ceabe3240  usr/bin/vx-renameshortcut
 c5dd2c3d6000dc19095745f707d9598d  usr/bin/vx-reproducir-video
 41688f235d2564851bec7f9f4338cca7  usr/bin/vx-unir-pdfs
-7130c85640a81c3f117a8c73f6a04d66  usr/share/doc/vx-dga-l-actions-explorador-archivos/changelog.Debian.gz
+1026862528da7c134e735358d153f558  usr/share/doc/vx-dga-l-actions-explorador-archivos/changelog.Debian.gz
 42d310ca22571e41ab96e54893d9d8a3  usr/share/doc/vx-dga-l-actions-explorador-archivos/copyright
 72e66632d4c1892b341a331f97503684  usr/share/icons/hicolor/scalable/apps/umount-usb.png
 15623c40e427af5d1e19bfb20ba63d9c  usr/share/icons/hicolor/scalable/apps/umount-usb.svg
@@ -56,7 +56,7 @@ c83742f8c2bed30be3d76338d9b37de5  usr/share/icons/vitalinux/vitalinux-256x.png
 fb1eaf252d918bf682c6b9d2402c3a88  usr/share/icons/vitalinux/vitalinux.png
 4a94fd9cce08e3fac46827b2cf42bfce  usr/share/icons/vitalinux/vitalinux.svg
 44491209468206afa664ab5d01be1858  usr/share/polkit-1/actions/actions.pkexec.migasfree.policy
-ecf8441ede6bf338a2febd18abbbea6a  usr/share/vitalinux/actions/desmotarusb.desktop
+2e68cee818a9c25c6df59d22a15171af  usr/share/vitalinux/actions/desmotarusb.desktop
 a527c81969d4bb8c6e63c37c925ded3d  usr/share/vitalinux/actions/leeme
 3c836384d07c1b77494ab272353e47eb  usr/share/vitalinux/actions/mantener-acceso-escritorio.desktop
 f57614c2a37ea2f81bec2ccd9a8adf0f  usr/share/vitalinux/actions/mb-editor.desktop
