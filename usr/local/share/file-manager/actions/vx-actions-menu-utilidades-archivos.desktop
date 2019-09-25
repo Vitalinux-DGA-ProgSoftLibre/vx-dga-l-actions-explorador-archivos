@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Menu
+
+Icon=archivo
+
+Name=Utilities Files
+Name[en]=Utilities Files
+Name[es_ES]=Utilidades Archivos
+Name[es]=Utilidades Archivos
+
+Tooltip=Utilities for managing files
+Tooltip[en]=Utilities for managing files
+Tooltip[es_ES]=Utilidades para el manejo de Archivos
+Tooltip[es]=Utilidades para el manejo de Archivos
+
+ItemsList=vx-actions-archivos-comprobar-md5;vx-actions-archivos-generar-md5;vx-actions-archivos-backup-aqui;vx-actions-archivos-abrir_con_editor;vx-actions-archivos-rename;vx-actions-imagenes-set-as-wallpaper;vx-actions-archivos-crear-lanzador;vx-actions-archivos-crear-lanzador-libro-ingles;vx-actions-archivos-copiar-a-destino

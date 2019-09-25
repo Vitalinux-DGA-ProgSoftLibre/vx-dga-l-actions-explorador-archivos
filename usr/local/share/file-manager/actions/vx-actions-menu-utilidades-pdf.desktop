@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Menu
+
+Icon=pdf
+
+Name=Utilities PDFs
+Name[en]=Utilities PDFs
+Name[es_ES]=Utilidades PDFs
+Name[es]=Utilidades PDFs
+
+Comment=Small utilities for the manipulation of PDFs
+Comment[en]=Small utilities for the manipulation of PDFs
+Comment[es]=Pequeñas utilidades para la manipulación de archivos PDFs
+
+ItemsList=vx-actions-pdfs-comprimir;vx-actions-pdfs-extraer-paginas;vx-actions-pdfs-unir

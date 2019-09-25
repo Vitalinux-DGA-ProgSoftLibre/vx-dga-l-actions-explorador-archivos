@@ -1,0 +1,27 @@
+[Desktop Entry]
+Type=Action
+
+Icon=text-editor
+
+ToolbarLabel[en]=Edit As Text
+ToolbarLabel=Edit As Text
+ToolbarLabel[es]=Editar como Texto
+
+Name[en_US]=Edit As Text
+Name[en]=Edit As Text
+Name=Edit As Text
+Name[es_ES]=Editar como Texto
+Name[es]=Editar como Texto
+
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+MimeTypes=all/allfiles;!inode/directory;
+TryExec=leafpad
+ShowIfTrue=vx-check-file-ascii-or-binary %f
+Exec=/usr/bin/leafpad %f
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[C]=Default profile
+Name[es_ES]=Default profile
+SelectionCount==1

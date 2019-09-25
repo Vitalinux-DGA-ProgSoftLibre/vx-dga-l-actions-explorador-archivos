@@ -1,0 +1,32 @@
+[Desktop Entry]
+Type=Action
+
+ToolbarLabel=Create Direct Access in Desktop
+ToolbarLabel[en]=Create Direct Access in Desktop
+ToolbarLabel[es]=Crear Acceso Directo en Escritorio
+ToolbarLabel[es_ES]=Crear Acceso Directo en Escritorio
+
+Name[es_ES]=Crear Acceso Directo en Escritorio
+Name[es] = Crear Acceso Directo en Escritorio
+Name[en] = Create Direct Access in Desktop
+Name = Create Direct Access in Desktop
+
+Profiles=profile-zero;
+
+Icon=escritorio_vx-acceso_directo
+
+[X-Action-Profile profile-zero]
+# Desde el "action" vx-crear-acceso-directo-escritorio se envía como parámetro "%f":
+# %f -> la ruta absoluta del archivo o directorio seleccionado
+## %d -> la ruta absoluta del directorio padre del archivo o directorio seleccionado
+## %w -> el nombre del archivo o directorio seleccionado (sin ruta absoluta)
+#Folders=!~/Escritorio;!~/Desktop;
+MimeTypes=inode/directory;all/allfiles
+ShowIfTrue=vx-check-if-not-is-in-desktop-dir %F
+TryExec=vx-crear-acceso-directo-escritorio
+Exec=vx-crear-acceso-directo-escritorio %F
+Name=Default profile
+Name[es]=Default profile
+Name[es_ES]=Default profile
+#SelectionCount=>1
+

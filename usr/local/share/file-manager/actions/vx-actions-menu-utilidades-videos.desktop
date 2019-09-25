@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Menu
+
+Icon=ico-videos
+
+Name=Utilities Videos
+Name[en]=Utilities Videos
+Name[es_ES]=Utilidades Vídeos
+Name[es]=Utilidades Vídeos
+
+Comment=Small utilities for the manipulation of Videos
+Comment[en]=Small utilities for the manipulation of Videos
+Comment[es]=Pequeñas utilidades para la manipulación de Vídeos
+
+ItemsList=vx-actions-videos-visualizar;

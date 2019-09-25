@@ -1,0 +1,52 @@
+[Desktop Entry]
+Type=Action
+
+Name=Open As Root
+Name[en_US]=Open As Root
+Name[en]=Open As Root
+Name[es]=Abrir como Root
+
+Tooltip[en_US]=Open As Root
+Tooltip[es]=Abrir como Root
+Tooltip[en]=Open As Root
+Tooltip=Open As Root
+
+ToolbarLabel[en_US]=Open As Root
+ToolbarLabel[en]=Open As Root
+ToolbarLabel=Open As Root
+ToolbarLabel[es]=Abrir como Root
+
+Icon=adminuser
+
+#Profiles=profile-zero;profile-1;profile-2;
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+#MimeTypes=inode/directory;
+ShowIfTrue=vx-check-is-user-sudo
+TryExec=vx-pk-abrir-como-root
+#TryExec=xdg-open
+Exec=vx-pk-abrir-como-root %f
+#Exec=gksu -k xdg-open %f
+Name=Open Folder As Root
+Name[en]=Open Folder As Root
+Name[es]=Abrir Carpeta como Root
+SelectionCount==1
+
+[X-Action-Profile profile-1]
+MimeTypes=all/allfiles;!text/plain;
+#Exec=vx-pk-abrir-como-root %f
+Exec=gksu xdg-open %f
+Name=Open File As Root
+Name[en]=Open File As Root
+Name[es]=Abrir Fichero como Root
+SelectionCount==1
+
+[X-Action-Profile profile-2]
+MimeTypes=text/plain;
+#Exec=vx-pk-abrir-como-root %f
+Exec=gksu xdg-open %f
+Name=Edit File Text As Root
+Name[en]=Edit File Text As Root
+Name[es]=Editar Arhivo de Texto como Root
+SelectionCount==1

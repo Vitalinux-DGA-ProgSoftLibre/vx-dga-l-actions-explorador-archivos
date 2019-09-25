@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Menu
+
+Icon=comprimir 
+
+Name=Utilities Compress
+Name[en]=Utilities Compress
+Name[es_ES]=Utilidades Comprimir
+Name[es]=Utilidades Comprimir
+
+Comment=Small utilities to compress documents, images, etc.
+Comment[en]=Small utilities to compress documents, images, etc.
+Comment[es]=Pequeñas utilidades para comprimir documentos, imágenes, etc.
+
+ItemsList=vx-actions-imagenes-comprimir-jpg;vx-actions-imagenes-comprimir-png;vx-actions-musica-comprimir-mp3

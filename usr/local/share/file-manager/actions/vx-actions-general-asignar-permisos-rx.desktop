@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Action
+
+Name[en]=Assign Reading Permissions
+Name=Assign Reading Permissions
+Name[es]=Asignar Permisos Lectura
+
+Icon=folder-access
+
+Profiles=profile-zero;
+[X-Action-Profile profile-zero]
+MimeTypes=inode/directory;
+TryExec=/usr/bin/vx-permisos-rx-recursivo
+Exec=vx-permisos-rx-recursivo %f
+Name[en]=Assign Reading Permissions
+Name=Assign Reading Permissions
+Name[es_ES]=Asignar Permisos Lectura

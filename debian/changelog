@@ -1,4 +1,62 @@
-vx-dga-l-actions-explorador-archivos (2.0-10) unstable; urgency=low
+vx-dga-l-actions-explorador-archivos (2.2-5) unstable; urgency=low
+
+  * XXX
+  * Propuestas del curso de aularagon:
+  * Extraer en un fichero la información de un MP3
+  * Pasar fotos a blanco y negro, con bordes blancos, poner texto, marca agua, etc.
+
+ -- Arturo Martín <amartinromero@gmail.com>  Tue, 11 Dec 2018 10:53:06 +0200
+
+vx-dga-l-actions-explorador-archivos (2.2-4) unstable; urgency=low
+
+  * Se eliminan las actions md5 al dar problemas con archivos grandes
+  * Se añade una action para asignar permisos de lectura y ejecucion recursivos
+
+ -- Arturo Martín <amartinromero@gmail.com>  Tue, 11 Dec 2018 10:53:06 +0200
+
+vx-dga-l-actions-explorador-archivos (2.2-3) unstable; urgency=low
+
+  * Se eliminan las polkit al pasarse todos los ejecutables al paquete scripts
+  * Se modifica la action Abrir como Root para funcionar por polkit en lugar de gksu
+
+ -- Arturo Martín <amartinromero@gmail.com>  Tue, 11 Dec 2018 10:53:06 +0200
+
+vx-dga-l-actions-explorador-archivos (2.2-2) unstable; urgency=low
+
+  * Se ha añadido la función de generar y chequear MD5
+  * Se ha añadido la función de poder imprimir directamente documentos
+  * Las actions relacionadas con la congelación se pasan al paquete de congelación
+  * Eliminamos cualquier action que haya configurada en el equipo que no empiece por vx-actions
+
+ -- Arturo Martín <amartinromero@gmail.com>  Tue, 11 Dec 2018 10:53:06 +0200
+
+vx-dga-l-actions-explorador-archivos (2.2-1) unstable; urgency=low
+
+  * Se ha resuelto mediante combobox la elección de las paginas a extraer del PDF
+  * Se ha resuelto el problema con los espacios en el nombre de los PDFs al unirlos
+
+ -- Ignacio Sancho <sannacho@gmail.com>  Tue, 12 Dec 2017 11:53:06 +0200
+
+vx-dga-l-actions-explorador-archivos (2.1-2) unstable; urgency=low
+
+  * Eliminada la dependencia del paquete php5-cli no usada
+
+ -- Ignacio Sancho <sannacho@gmail.com>  Tue, 12 Dec 2017 11:53:06 +0200
+ 
+vx-dga-l-actions-explorador-archivos (2.1-1) unstable; urgency=low
+
+  * Se han movido todos los iconos de vx-dga-l-iconos a este paquete que son propios de él
+  * Se ha añadido el campo Replaces en el archivo control por la imagen pdf.svg
+
+ -- Arturo Martín <amartinromero@gmail.com>  Mon, 13 Mar 2017 12:53:06 +0200
+
+vx-dga-l-actions-explorador-archivos (2.0-12) unstable; urgency=low
+
+  * Añadimos la dependencia con udisks para que liste los pendrives
+
+ -- Arturo Martín <amartinromero@gmail.com>  Mon, 13 Mar 2017 12:53:06 +0200
+
+vx-dga-l-actions-explorador-archivos (2.0-11) unstable; urgency=low
 
   * Acciones de menú personalizables para nuestro explorador de archivos
   * Adaptación de los scripts hechos por Vasian <no@email.com> de http://madebits.com
@@ -12,5 +70,6 @@ vx-dga-l-actions-explorador-archivos (2.0-10) unstable; urgency=low
   * Se ha creado una utilidad para reproducir vídeos en miniatura
   * 2016-6-6: Se ha añadido una action para mandar archivos vía email
   * 2016-11-3: Se soluciona un bug en la accion de desmontaje, para usar udisk2 en lugar de udisk
+  * 2016-11-22: Creamos un action para crear un acceso directo en Escritorio
 
  -- Arturo Martín <amartinromero@gmail.com>  Thu, 3 Mar 2016 12:53:06 +0200

@@ -55,11 +55,12 @@ case "$1" in
   			rm -f /etc/polkit-1/localauthority/50-local.d/montajes.pkla
   		fi
 	fi
-	generar-iconos "videos" "reproducir-video" "mandar-por-email"
+	# generar-iconos "videos"
 
-	if update-icon-caches /usr/share/vitalinux/iconos ; then
-		echo "--> Se han actualizado los iconos de Vitalinux ..."
-	fi
+	DIR="/usr/share/vitalinux/iconos"
+	[[ -d "${DIR}" ]] && \
+		update-icon-caches /usr/share/vitalinux/iconos && \
+		echo "=> Se han actualizado los iconos de Vitalinux ..."
 
 	chmod +x /usr/bin/vx-*
 	
@@ -67,7 +68,7 @@ case "$1" in
 	then
 		mkdir -p /usr/local/share/file-manager/actions
 	fi
-	cp /usr/share/vitalinux/actions/* /usr/local/share/file-manager/actions
+	#cp /usr/share/vitalinux/actions/* /usr/local/share/file-manager/actions
 
     ;;
 

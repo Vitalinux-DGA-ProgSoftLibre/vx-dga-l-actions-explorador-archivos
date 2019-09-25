@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Action
+Profiles=profile-zero;
+
+Name=Open Terminal Here
+Name[en]=Open Terminal Here
+Name[es]=Abrir Terminal Aquí
+Name[es_ES]=Abrir Terminal Aquí
+
+Tooltip=Utility that allows to open a Terminal in the directory where you are browsing
+Tooltip[en]=Utility that allows to open a Terminal in the directory where you are browsing
+Tooltip[es_ES]=Utilidad que permite abrir una Terminal en el directorio donde te encuentras navegando
+Tooltip[es]=Utilidad que permite abrir una Terminal en el directorio donde te encuentras navegando
+
+ToolbarLabel=Open Terminal Here
+ToolbarLabel[en]=Open Terminal Here
+ToolbarLabel[es_ES]=Abrir Terminal Aquí
+ToolbarLabel[es]=Abrir Terminal Aquí
+
+Icon=utilities-terminal
+
+[X-Action-Profile profile-zero]
+MimeTypes=inode/directory;
+Exec=/usr/bin/lxterminal --working-directory=%f
+SelectionCount==1

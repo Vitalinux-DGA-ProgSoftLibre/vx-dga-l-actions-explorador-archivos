@@ -1,0 +1,29 @@
+[Desktop Entry]
+Type=Action
+
+ToolbarLabel=Utility to Compress PNG Images
+ToolbarLabel[en]=Utility to Compress PNG Images
+ToolbarLabel[es]=Utilidad para Comprimir Imágenes PNG
+ToolbarLabel[es_ES]=Utilidad para Comprimir Imágenes PNG
+
+Tooltip=Utility to Compress PNG Images
+Tooltip[en]=Utility to Compress PNG Images
+Tooltip[es_ES]=Utilidad para Comprimir Imágenes PNG
+Tooltip[es]=Utilidad para Comprimir Imágenes PNG
+
+Name=Compress PNG
+Name[en]=Compress PNG
+Name[es]=Comprimir PNG
+Name[es_ES]=Comprimir PNG
+
+Profiles=profile-zero;
+
+Icon=png-icon
+
+[X-Action-Profile profile-zero]
+MimeTypes=image/png
+Exec=/usr/bin/vx-comprimir-png %F
+Name=Default profile
+Name[en]=Default profile
+Name[es_ES]=Default profile
+

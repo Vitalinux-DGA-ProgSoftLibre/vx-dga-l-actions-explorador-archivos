@@ -1,0 +1,23 @@
+[Desktop Entry]
+Type=Action
+
+ToolbarLabel[es]=Utilidad para que permite Extraer un grupo de Páginas de un PDF
+ToolbarLabel[en]=Utility to allow you to Extract a group of Pages from a PDF
+ToolbarLabel=Utility to allow you to Extract a group of Pages from a PDF
+ToolbarLabel[es_ES]=Utilidad para que permite Extraer un grupo de Páginas de un PDF
+
+Name=Extract Group Pages from a PDF
+Name[en]=Extract Group Pages from a PDF
+Name[es]=Extraer Grupo Páginas de un PDF
+Name[es_ES]=Extraer Grupo Páginas de un PDF
+
+Profiles=profile-zero;
+
+Icon=pdf
+
+[X-Action-Profile profile-zero]
+MimeTypes=application/pdf;application/x-pdf
+Exec=/usr/bin/vx-extraer-paginas-pdfs %F %W
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[es_ES]=Default profile

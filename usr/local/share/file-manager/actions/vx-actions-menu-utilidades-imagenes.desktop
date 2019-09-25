@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Menu
+
+Icon=foto 
+
+Name=Utilities Images
+Name[en]=Utilities Images
+Name[es_ES]=Utilidades Imágenes
+Name[es]=Utilidades Imágenes
+
+Comment=Small utilities for the manipulation of PNG images, JPG, etc.
+Comment[en]=Small utilities for the manipulation of PNG images, JPG, etc.
+Comment[es]=Pequeñas utilidades para la manipulación de Imágenes PNG, JPG, etc.
+Comment[es_ES]=Pequeñas utilidades para la manipulación de Imágenes PNG, JPG, etc.
+
+ItemsList=vx-actions-imagenes-slideshow;vx-actions-imagenes-comprimir-jpg;vx-actions-imagenes-comprimir-png;vx-actions-imagenes-info;vx-actions-imagenes-generar-thumbnails;vx-actions-imagenes-convertir

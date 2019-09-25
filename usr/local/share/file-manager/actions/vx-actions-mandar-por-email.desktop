@@ -1,0 +1,26 @@
+[Desktop Entry]
+Type=Action
+Profiles=profile-zero
+
+Name=Send via Gmail
+Name[en]=Send via Gmail
+Name[es]=Enviar vía Gmail
+
+Tooltip=Send via Gmail
+Tooltip[en]=Send via Gmail
+Tooltip[es]=Envía por Gmail los Archivos Seleccionados
+Tooltip[es_ES]=Envía por Gmail los Archivos Seleccionados
+
+ToolbarLabel=Send via Gmail
+ToolbarLabel[en]=Send via Gmail
+ToolbarLabel[es]=Enviar vía Gmail
+ToolbarLabel[es_ES]=Enviar vía Gmail
+
+Icon=mandar-por-email
+
+[X-Action-Profile profile-zero]
+MimeTypes=!inode/directory;all/allfiles
+Exec=/usr/bin/vx-mandar-por-email-yad %F
+Name[es]=Enviar vía Gmail
+Name[en]=Send via Gmail
+Name=Send via Gmail

@@ -1,0 +1,28 @@
+[Desktop Entry]
+Type=Action
+Profiles=profile-zero;
+
+Name[en_US]=Empty Trash
+Name[en]=Empty Trash
+Name=Empty Trash
+Name[es_ES]=Vaciar Papelera
+Name[es]=Vaciar Papelera
+
+Icon=papelera
+
+# Si queremos que la opción aparezca aún cuando pinchamos con el botón derecho del ratón en un área vacía:
+TargetLocation=true
+
+# Indicamos que queremos que la acción se muestre cuando el archivo coincida con la lista de MimeTypes indicados en el action correspondiente:
+TargetContext=true
+
+TargetToolbar=true
+
+[X-Action-Profile profile-zero]
+MimeTypes=inode/directory;all/allfiles
+#Basenames=trash:///
+Exec=/usr/bin/trash-empty
+Name[en_US]=Empty Trash
+Name[en]=Empty Trash
+Name=Empty Trash
+Name[es_ES]=Vaciar Papelera

@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Action
+
+ToolbarLabel[es]=Utilidad que nos informa de Detalles de la Imagen
+ToolbarLabel[es_ES]=Utilidad que nos informa de Detalles de la Imagen
+Tooltip[es_ES]=Utilidad que nos informa de Detalles de la Imagen
+Tooltip[es]=Utilidad que nos informa de Detalles de la Imagen
+
+Name=Details of the Image
+Name[en]=Details of the Image
+Name[es]=Detalles de la Imagen
+Name[es_ES]=Detalles de la Imagen
+
+Profiles=profile-zero;
+
+Icon=camara
+
+[X-Action-Profile profile-zero]
+MimeTypes=image/bmp;image/gif;image/jpeg;image/png;image/svg+xml;image/tiff
+Exec=/usr/bin/vx-imagenes-info %F
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[es_ES]=Default profile
+Name=Default profile
+

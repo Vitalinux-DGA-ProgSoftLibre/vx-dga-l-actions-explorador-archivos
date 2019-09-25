@@ -1,0 +1,33 @@
+[Desktop Entry]
+Type=Action
+Profiles=profile-zero
+
+Name=Remove USB
+Name[en]=Remove USB
+Name[es]=Quitar USB
+
+Tooltip=Remove USB
+Tooltip[en]=Remove USB
+Tooltip[es]=Quitar USB de forma segura
+
+ToolbarLabel=Remove USB
+ToolbarLabel[es]=Quitar USB
+ToolbarLabel[en]=Remove USB
+
+Icon=umount-usb
+
+# Si queremos que la opción aparezca aún cuando pinchamos con el botón derecho del ratón en un área vacía:
+TargetLocation=true
+
+# Indicamos que queremos que la acción se muestre cuando el archivo coincida con la lista de MimeTypes indicados en el action correspondiente:
+TargetContext=true
+
+
+TargetToolbar=true
+
+[X-Action-Profile profile-zero]
+MimeTypes=inode/directory;all/allfiles
+Exec=/usr/bin/vx-desmontar-usb
+Name[es]=Quitar USB
+Name=Remove USB
+
